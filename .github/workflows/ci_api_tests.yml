@@ -1,5 +1,3 @@
-# .github/workflows/ci_api_tests.yml
-
 name: Playwright API CI
 
 on:
@@ -22,13 +20,12 @@ jobs:
       - name: Start API with Docker Compose
         run: |
           cd restful-booker-platform
-          # Startet die API auf Port 3000 im Hintergrund
           docker compose up -d
 
       - name: Checkout Test Repository
         uses: actions/checkout@v4
         with:
-          path: .
+          path: restful-booker-qa-tests
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -36,13 +33,17 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm ci
+        run: |
+          cd restful-booker-qa-tests
+          npm ci
 
       - name: Wait for API Service to be Ready
         run: npx wait-on http://localhost:3000/ping
 
       - name: Run Playwright Tests (API-Tests)
-        run: npx playwright test
+        run: |
+          cd restful-booker-qa-tests
+          npx playwright test
         env:
           CI: "true"
 
@@ -51,4 +52,4 @@ jobs:
         if: always()
         with:
           name: playwright-report
-          path: playwright-report/
+          path: restful-booker-qa-tests/playwright-report/
