@@ -1,3 +1,5 @@
+# .github/workflows/ci_api_tests.yml
+
 name: Playwright API CI
 
 on:
@@ -7,18 +9,20 @@ on:
     branches: [main]
 
 jobs:
-  start_api:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Dummy API Start Check
-        run: echo "Simulating API readiness on http://localhost:3000"
-
-      - name: Wait for API to be 'ready'
-        run: sleep 5
-
   run_tests:
-    needs: start_api
     runs-on: ubuntu-latest
+
+    services:
+      restful_booker_api:
+        image: marksevenseven/restful-booker-platform:latest
+        ports:
+          - 3000:80
+        options: >
+          --health-cmd "curl http://localhost/ping || exit 1" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -31,8 +35,8 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Wait for API Service to be Ready
+        run: npx wait-on http://localhost:3000/ping
 
       - name: Run Playwright Tests (API-Tests)
         run: npx playwright test

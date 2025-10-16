@@ -2,7 +2,7 @@ node_modules/
 /test-results/
 .env
 
-/target/
+/playwright-report/
 
 /.idea/
 .vscode/
