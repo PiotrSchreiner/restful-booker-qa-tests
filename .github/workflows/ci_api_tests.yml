@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Test Repository
+        uses: actions/checkout@v4
+        with:
+          path: restful-booker-qa-tests
+
       - name: Checkout API Platform Repository
         run: git clone https://github.com/AutomationPanda/restful-booker-platform.git
 
@@ -18,11 +23,6 @@ jobs:
         run: |
           cd restful-booker-platform
           docker compose up -d
-
-      - name: Checkout Test Repository
-        uses: actions/checkout@v4
-        with:
-          path: restful-booker-qa-tests
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
