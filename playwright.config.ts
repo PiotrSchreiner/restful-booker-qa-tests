@@ -11,6 +11,12 @@ export default defineConfig({
   use: {
     baseURL: "http://localhost:3000",
     trace: "on-first-retry",
+
+    extraHTTPHeaders: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "User-Agent": "RestfulBookerQA/1.0 (CI-Testing)",
+    },
   },
 
   projects: [
