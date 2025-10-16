@@ -2,37 +2,41 @@
 
 ## 🚧 Projekt-Status: Work In Progress (WIP)
 
-Dieses Repository befindet sich im aktiven Aufbau. Derzeit ist der Fokus auf die Validierung des grundlegenden API-Health-Checks gelegt. Die komplexeren Tests (z.B. Authentifizierung, CRUD-Operationen) sind in der Entwicklung und derzeit deaktiviert.
+Dieses Repository befindet sich im aktiven Aufbau und wurde auf das Playwright-Framework migriert. Derzeit liegt der Fokus auf der Implementierung robuster **End-to-End (E2E)** und **API-Tests** in einem einheitlichen Stack.
 
 ## 🎯 Zweck des Projekts
 
 Dieses Repository dient als dedizierte **Quality Assurance (QA) Test-Suite** für die **Restful-Booker API Platform**.
 
-Es demonstriert Best Practices im Bereich API-Automatisierung und gewährleistet die Funktionsfähigkeit und Stabilität der einzelnen Endpunkte.
+Es demonstriert die Implementierung der **Test-Pyramide**, wobei **API- und E2E-Tests** im selben Playwright/Node.js-Ökosystem implementiert werden.
 
 ## 🛠️ Technologien
 
 Die Tests werden mit folgenden Technologien entwickelt und ausgeführt:
 
-- **Java 17+**
-- **Apache Maven** (Build-Management)
-- **RestAssured** (HTTP-Client für API-Tests)
-- **JUnit 5** (Test-Framework)
+- **Node.js**
+- **Playwright** (Für E2E- und API-Tests)
+- **TypeScript** (Für robuste und wartbare Tests)
+- **npm** (Package Management)
 
-## ✅ Test-Übersicht
+## ✅ Test-Übersicht (Initialer Zustand)
 
-| Test-Szenario            | Endpunkt       | Status          | Anmerkung                                                                                             |
-| :----------------------- | :------------- | :-------------- | :---------------------------------------------------------------------------------------------------- |
-| **Basic Health Check**   | `GET /booking` | **🟢 Success**  | Verifiziert die Erreichbarkeit der Basis-Funktionalität.                                              |
-| **Authentication Tests** | `POST /auth`   | **🟡 Disabled** | Tests sind vorhanden, aber vorübergehend deaktiviert (@Disabled) für den aktuellen Entwicklungsstand. |
+| Test-Szenario          | Typ | Status     | Anmerkung                                                      |
+| :--------------------- | :-- | :--------- | :------------------------------------------------------------- |
+| **Basic Health Check** | API | 🟡 Pending | Erster Test, der mit Playwright-API-Tests implementiert wird.  |
+| **Authentication**     | API | 🟡 Pending | Erstellung des Tokens für CRUD-Operationen.                    |
+| **Login-Prozess**      | E2E | 🟡 Pending | UI-Interaktionstests zur Verifizierung der Benutzeroberfläche. |
 
 ## 🚀 Ausführung der Tests
 
 Voraussetzung ist, dass die **Restful-Booker Platform** lokal auf **Port 3000** läuft.
 
-1.  **Voraussetzung:** Navigiere zum Wurzelverzeichnis des Projekts.
-2.  **Ausführung:** Starte die Tests mit Maven:
+1.  **Voraussetzung:** Installieren Sie die Abhängigkeiten:
+    ```bash
+    npm install
+    ```
+2.  **Ausführung:** Starten Sie alle konfigurierten Tests:
 
     ```bash
-    mvn test
+    npx playwright test
     ```

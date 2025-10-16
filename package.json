@@ -1,0 +1,26 @@
+{
+  "name": "restful-booker-qa-tests",
+  "version": "1.0.0",
+  "description": "Dieses Repository befindet sich im aktiven Aufbau. Derzeit ist der Fokus auf die Validierung des grundlegenden API-Health-Checks gelegt. Die komplexeren Tests (z.B. Authentifizierung, CRUD-Operationen) sind in der Entwicklung und derzeit deaktiviert.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiotrSchreiner/restful-booker-qa-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiotrSchreiner/restful-booker-qa-tests/issues"
+  },
+  "homepage": "https://github.com/PiotrSchreiner/restful-booker-qa-tests#readme",
+  "dependencies": {
+    "@playwright/test": "^1.56.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.8.0"
+  }
+}
