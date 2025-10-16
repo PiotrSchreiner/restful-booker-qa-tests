@@ -12,10 +12,7 @@ jobs:
 
     steps:
       - name: Checkout API Platform Repository
-        uses: actions/checkout@v4
-        with:
-          repository: "AutomationPanda/restful-booker-platform"
-          path: restful-booker-platform
+        run: git clone https://github.com/AutomationPanda/restful-booker-platform.git
 
       - name: Start API with Docker Compose
         run: |
