@@ -17,7 +17,11 @@ jobs:
           path: restful-booker-qa-tests
 
       - name: Checkout API Platform Repository
-        run: git clone https://github.com/AutomationPanda/restful-booker-platform.git
+        uses: actions/checkout@v4
+        with:
+          repository: AutomationPanda/restful-booker-platform
+          path: restful-booker-platform
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Start API with Docker Compose
         run: |
