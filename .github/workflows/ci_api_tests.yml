@@ -1,3 +1,5 @@
+# .github/workflows/ci_api_tests.yml
+
 name: Playwright API CI
 
 on:
@@ -7,23 +9,26 @@ on:
     branches: [main]
 
 jobs:
-  run_tests:
+  api_tests:
     runs-on: ubuntu-latest
 
-    services:
-      restful_booker_api:
-        image: restfulbooker/service:latest
-        ports:
-          - 3000:80
-        options: >
-          --health-cmd "curl http://localhost/ping || exit 1" 
-          --health-interval 10s 
-          --health-timeout 5s 
-          --health-retries 5
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout API Platform Repository
         uses: actions/checkout@v4
+        with:
+          repository: "AutomationPanda/restful-booker-platform"
+          path: restful-booker-platform
+
+      - name: Start API with Docker Compose
+        run: |
+          cd restful-booker-platform
+          # Startet die API auf Port 3000 im Hintergrund
+          docker compose up -d
+
+      - name: Checkout Test Repository
+        uses: actions/checkout@v4
+        with:
+          path: .
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
